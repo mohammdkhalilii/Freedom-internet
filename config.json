@@ -1,0 +1,167 @@
+{
+    "log": {
+      "loglevel": "warning",
+      "access": "/var/log/xray/access.log",
+      "error": "/var/log/xray/error.log"
+    },
+    "routing": {
+      "domainStrategy": "AsIs",
+      "rules": [
+          {
+              "type": "field",
+              "outboundTag": "block",
+              "protocol": [
+                  "bittorrent"
+              ],
+              "domain": [
+                  "geosite:category-ads-all",
+                  "geosite:category-porn"
+              ],
+              "ip": [
+                  "geoip:private",
+                  "geoip:ir"
+              ]
+          }
+      ]
+    },
+    "inbounds": [
+      {
+        "port": 443,
+        "protocol": "vless",
+        "settings": {
+            "clients": [
+              {
+                "id": "8a1f0462-405d-4314-9566-a2d49860969a",
+                "email": "1@admin"
+              }
+            ],
+            "decryption": "none"
+        },
+        "streamSettings": {
+          "network": "tcp",
+          "tcpSettings": {
+            "header": {
+              "type": "http",
+              "response": {
+                "version": "1.1",
+                "status": "200",
+                "reason": "OK",
+                "headers": {
+                  "Content-Type": [
+                    "application/octet-stream",
+                    "application/x-msdownload",
+                    "text/html",
+                    "application/x-shockwave-flash"
+                  ],
+                  "Transfer-Encoding": [
+                    "chunked"
+                  ],
+                  "Connection": [
+                    "keep-alive"
+                  ],
+                  "Pragma": "no-cache"
+                }
+              }
+            }
+          },
+          "security": "tls",
+          "tlsSettings": {
+            "alpn": [
+              "h2",
+              "http/1.1"
+            ],
+            "certificates": [
+              {
+                "certificateFile": "/ssl/xray.crt",
+                "keyFile": "/ssl/xray.key"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "port": 8443,
+        "protocol": "vless",
+        "settings": {
+            "clients": [
+                {
+                    "id": "8a1f0462-405d-4314-9566-a2d49860969a",
+                    "email": "1@admin"
+                }
+            ],
+            "decryption": "none"
+        },
+        "streamSettings": {
+            "network": "ws",
+            "wsSettings": {
+                "path": "/users"
+            },
+            "security": "tls",
+            "tlsSettings": {
+                "certificates": [
+                    {
+                        "certificateFile": "/ssl/xray.crt",
+                        "keyFile": "/ssl/xray.key"
+                    }
+                ]
+              }
+        }
+      },
+      {
+        "port": 8080,
+        "protocol": "vmess",
+        "settings": {
+          "clients": [
+            {
+              "id": "8a1f0462-405d-4314-9566-a2d49860969a",
+              "email": "1@admin",
+              "level": 1,
+              "alterId": 0
+            }
+          ],
+          "disableInsecureEncryption": true
+        },
+        "streamSettings": {
+          "network": "tcp",
+          "tcpSettings": {
+            "header": {
+              "type": "http",
+              "response": {
+                "version": "1.1",
+                "status": "200",
+                "reason": "OK",
+                "headers": {
+                  "Content-Type": [
+                    "application/octet-stream",
+                    "application/x-msdownload",
+                    "text/html",
+                    "application/x-shockwave-flash"
+                  ],
+                  "Transfer-Encoding": [
+                    "chunked"
+                  ],
+                  "Connection": [
+                    "keep-alive"
+                  ],
+                  "Pragma": "no-cache"
+                }
+              }
+            }
+          },
+          "security": "auto"
+        }
+      }
+  
+    ],
+    "outbounds": [
+      {
+          "protocol": "freedom",
+          "tag": "direct"
+      },
+      {
+          "protocol": "blackhole",
+          "tag": "block"
+      }
+    ]
+  }
+  
