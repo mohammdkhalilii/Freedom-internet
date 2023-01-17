@@ -52,7 +52,7 @@ wget -N --no-check-certificate https://github.com/teddysun/across/raw/master/bbr
 rm bbr* install*
 # Xray Config
 mv /usr/local/etc/xray/config.json /usr/local/etc/xray/config.json.old
-nano /usr/local/etc/xray/config.json
+cp /root/Freedom-internet/config.json /usr/local/etc/xray/
 systemctl restart xray
 systemctl status xray
 echo "************   DONE   *************"
