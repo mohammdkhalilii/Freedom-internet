@@ -17,7 +17,7 @@ apt install ufw curl git nginx nginx-common -y
 # Setup nginx  
 envsubst < ./default
 rm /etc/nginx/sites-enabled/default
-cp ./default /etc/nginx/sites-enabled/default
+cp ./default /etc/nginx/sites-enabled/
 chmod 777 /etc/nginx/sites-enabled/default
 
 systemctl enable nginx 
