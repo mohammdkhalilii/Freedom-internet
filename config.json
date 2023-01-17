@@ -25,132 +25,215 @@
       ]
     },
     "inbounds": [
-      {
-        "port": 443,
-        "protocol": "vless",
-        "settings": {
-            "clients": [
-              {
-                "id": "8a1f0462-405d-4314-9566-a2d49860969a",
-                "email": "1@admin"
-              }
-            ],
-            "decryption": "none"
-        },
-        "streamSettings": {
-          "network": "tcp",
-          "tcpSettings": {
-            "header": {
-              "type": "http",
-              "response": {
-                "version": "1.1",
-                "status": "200",
-                "reason": "OK",
-                "headers": {
-                  "Content-Type": [
-                    "application/octet-stream",
-                    "application/x-msdownload",
-                    "text/html",
-                    "application/x-shockwave-flash"
-                  ],
-                  "Transfer-Encoding": [
-                    "chunked"
-                  ],
-                  "Connection": [
-                    "keep-alive"
-                  ],
-                  "Pragma": "no-cache"
-                }
-              }
+          {
+            "port": 14741,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "8a1f0462-405d-4314-9566-a2d49860969a",
+                        "email": "1@admin",
+                        "alterId": 64
+                    }
+                ],
+                "disableInsecureEncryption": true
+            },
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/users"
+                },
+                "security": "auto"
             }
           },
-          "security": "tls",
-          "tlsSettings": {
-            "alpn": [
-              "h2",
-              "http/1.1"
-            ],
-            "certificates": [
-              {
-                "certificateFile": "/ssl/xray.crt",
-                "keyFile": "/ssl/xray.key"
-              }
-            ]
-          }
-        }
-      },
-      {
-        "port": 8443,
-        "protocol": "vless",
-        "settings": {
-            "clients": [
+          {
+            "port": 8080,
+            "protocol": "vmess",
+            "settings": {
+              "clients": [
                 {
-                    "id": "8a1f0462-405d-4314-9566-a2d49860969a",
-                    "email": "1@admin"
+                  "id": "8a1f0462-405d-4314-9566-a2d49860969a",
+                  "email": "1@admin",
+                  "level": 1,
+                  "alterId": 0
                 }
-            ],
-            "decryption": "none"
-        },
-        "streamSettings": {
-            "network": "ws",
-            "wsSettings": {
-                "path": "/users"
+              ],
+              "disableInsecureEncryption": true
             },
-            "security": "tls",
-            "tlsSettings": {
-                "certificates": [
-                    {
-                        "certificateFile": "/ssl/xray.crt",
-                        "keyFile": "/ssl/xray.key"
+            "streamSettings": {
+              "network": "tcp",
+              "tcpSettings": {
+                "header": {
+                  "type": "http",
+                  "response": {
+                    "version": "1.1",
+                    "status": "200",
+                    "reason": "OK",
+                    "headers": {
+                      "Content-Type": [
+                        "application/octet-stream",
+                        "application/x-msdownload",
+                        "text/html",
+                        "application/x-shockwave-flash"
+                      ],
+                      "Transfer-Encoding": [
+                        "chunked"
+                      ],
+                      "Connection": [
+                        "keep-alive"
+                      ],
+                      "Pragma": "no-cache"
                     }
+                  }
+                }
+              },
+              "security": "auto"
+            }
+          },
+          {
+            "port": 8442,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "8a1f0462-405d-4314-9566-a2d49860969a",
+                        "email": "1@admin",
+                        "alterId": 64
+                    }
+                ],
+                "disableInsecureEncryption": true
+            },
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/users"
+                },
+                "security": "tls",
+                "tlsSettings": {
+                "alpn": [
+                  "http/1.1",
+                  "h2"
+                ],
+                "certificates": [
+                  {
+                    "certificateFile": "/ssl/xray.crt",
+                    "keyFile": "/ssl/xray.key"
+                  }
                 ]
               }
-        }
-      },
-      {
-        "port": 8080,
-        "protocol": "vmess",
-        "settings": {
-          "clients": [
-            {
-              "id": "8a1f0462-405d-4314-9566-a2d49860969a",
-              "email": "1@admin",
-              "level": 1,
-              "alterId": 0
             }
-          ],
-          "disableInsecureEncryption": true
-        },
-        "streamSettings": {
-          "network": "tcp",
-          "tcpSettings": {
-            "header": {
-              "type": "http",
-              "response": {
-                "version": "1.1",
-                "status": "200",
-                "reason": "OK",
-                "headers": {
-                  "Content-Type": [
-                    "application/octet-stream",
-                    "application/x-msdownload",
-                    "text/html",
-                    "application/x-shockwave-flash"
-                  ],
-                  "Transfer-Encoding": [
-                    "chunked"
-                  ],
-                  "Connection": [
-                    "keep-alive"
-                  ],
-                  "Pragma": "no-cache"
+          },
+          {
+            "port": 8443,
+            "protocol": "trojan",
+            "settings": {
+              "clients": [
+                {
+                  "password": "d0eb26ccf1396ceefd",
+                  "email": "1@admin"
                 }
+              ]
+            },
+            "streamSettings": {
+              "network": "gun",
+              "grpcSettings": {
+                "serviceName": "zan-zendegi-azadi"
+              },
+              "security": "tls",
+              "tlsSettings": {
+                "alpn": [
+                  "http/1.1",
+                  "h2"
+                ],
+                "certificates": [
+                  {
+                    "certificateFile": "/ssl/xray.crt",
+                    "keyFile": "/ssl/xray.key"
+                  }
+                ]
               }
             }
           },
-          "security": "auto"
-        }
-      }
+          {
+            "port": 8444,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                  {
+                    "id": "8a1f0462-405d-4314-9566-a2d49860969a",
+                    "email": "1@admin"
+                  }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+              "network": "tcp",
+              "tcpSettings": {
+                "header": {
+                  "type": "http",
+                  "response": {
+                    "version": "1.1",
+                    "status": "200",
+                    "reason": "OK",
+                    "headers": {
+                      "Content-Type": [
+                        "application/octet-stream",
+                        "application/x-msdownload",
+                        "text/html",
+                        "application/x-shockwave-flash"
+                      ],
+                      "Transfer-Encoding": [
+                        "chunked"
+                      ],
+                      "Connection": [
+                        "keep-alive"
+                      ],
+                      "Pragma": "no-cache"
+                    }
+                  }
+                }
+              },
+              "security": "tls",
+              "tlsSettings": {
+                "alpn": [
+                  "h2",
+                  "http/1.1"
+                ],
+                "certificates": [
+                  {
+                    "certificateFile": "/ssl/xray.crt",
+                    "keyFile": "/ssl/xray.key"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "port": 8445,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                  {
+                    "id": "8a1f0462-405d-4314-9566-a2d49860969a",
+                    "email": "1@admin",
+                    "flow" : "xtls-rprx-vision"
+                  }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+              "network": "tcp",
+              "security": "tls",
+              "tlsSettings": {
+                "certificates": [
+                  {
+                    "certificateFile": "/ssl/xray.crt",
+                    "keyFile": "/ssl/xray.key"
+                  }
+                ]
+              }
+            }
+          }
   
     ],
     "outbounds": [
@@ -164,4 +247,3 @@
       }
     ]
   }
-  
