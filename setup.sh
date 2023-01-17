@@ -56,23 +56,3 @@ nano /usr/local/etc/xray/config.json
 systemctl restart xray
 systemctl status xray
 echo "************   DONE   *************"
-
-
-
-
-
-# input domain 
-apt install nginx nginx-full python3-certbot-nginx -y
-rm /etc/nginx/sites-enabled/default
-certbot --nginx -d a4.snapfood.cloud
-cp default /etc/nginx/sites-enabled/
-
-
-
-
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root /var/www/html;
-    server_name a4.snapfood.cloud ;
-}
