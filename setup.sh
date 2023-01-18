@@ -9,6 +9,15 @@ apt upgrade -y
 echo -e "\033[0;35m *** Enter Domain: \033[0m"
 read varname
 export DOMAIN_NAME=$varname
+
+echo -e "\033[0;35m *** Enter CDN: \033[0m"
+read varname
+export CDN_NAME=$varname
+
+echo -e "\033[0;35m *** Enter VPN NAME: \033[0m"
+read varname
+export VPN_NAME=$varname
+
 echo $DOMAIN_NAME
 # Setup Xray 
 bash -c "$(curl -L https://github.com/thehxdev/xray-install/raw/main/xray.sh)"
@@ -25,8 +34,8 @@ nginx -t
 systemctl start nginx 
 nginx -s reload
 # Setup Fake website
-rm /var/www/html/*
-cp ./html/* /var/www/html
+# rm /var/www/html/*
+# cp ./html/* /var/www/html
 # Change SSH port
 rm /etc/ssh/sshd_config
 cp ./sshd_config /etc/ssh/

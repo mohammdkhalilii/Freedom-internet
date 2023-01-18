@@ -1,14 +1,13 @@
 server {
-
 	root /var/www/html;
 
 	index index.html index.htm index.nginx-debian.html;
 
-	server_name $DOMAIN_NAME;
+	server_name g1.cloud-box.buzz;
 
 	location / {
-		try_files $uri $uri/ =404;
-	}
+                rewrite ^/(.*)$ https://cloudboxtech.com/$1 permanent;
+        }
 
 	location /users {
 		proxy_redirect off;
@@ -22,28 +21,18 @@ server {
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 	}
 	
-
     listen [::]:443 ssl ipv6only=on; # managed by Certbot
     listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/$DOMAIN_NAME/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/g1.cloud-box.buzz/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/g1.cloud-box.buzz/privkey.pem; # managed by Certbot
     # include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     # ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
-
-    listen 80;
-    listen [::]:80;
 }
 
 
 server {
-    # if ($host = a4.snapfood.cloud) {
-    #     return 301 https://$host$request_uri;
-    # } # managed by Certbot
-
-
-
-    server_name $DOMAIN_NAME;
+    server_name g1.cloud-box.buzz;
 
 	location /users {
 		proxy_redirect off;
