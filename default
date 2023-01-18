@@ -7,7 +7,7 @@ server {
 
 	location / {
                 rewrite ^/(.*)$ https://cloudboxtech.com/$1 permanent;
-        }
+    }
 
 	location /users {
 		proxy_redirect off;
