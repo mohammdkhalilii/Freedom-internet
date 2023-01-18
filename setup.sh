@@ -24,7 +24,7 @@ bash -c "$(curl -L https://github.com/thehxdev/xray-install/raw/main/xray.sh)"
 # Install Requrements
 apt install ufw curl git nginx nginx-common -y
 # Setup nginx  
-envsubst < ./default
+# envsubst < ./default
 rm /etc/nginx/sites-enabled/default
 cp ./default /etc/nginx/sites-enabled/
 chmod 777 /etc/nginx/sites-enabled/default
