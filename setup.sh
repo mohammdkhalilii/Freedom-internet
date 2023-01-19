@@ -24,18 +24,19 @@ bash -c "$(curl -L https://github.com/thehxdev/xray-install/raw/main/xray.sh)"
 # Install Requrements
 apt install ufw curl git nginx nginx-common -y
 # Setup nginx  
-# envsubst < ./default
+rm /var/www/html/*
 rm /etc/nginx/sites-enabled/default
 cp ./default /etc/nginx/sites-enabled/
 chmod 777 /etc/nginx/sites-enabled/default
+
+nano /etc/nginx/sites-enabled/default
 
 systemctl enable nginx 
 nginx -t
 systemctl start nginx 
 nginx -s reload
-# Setup Fake website
-# rm /var/www/html/*
-# cp ./html/* /var/www/html
+
+
 # Change SSH port
 rm /etc/ssh/sshd_config
 cp ./sshd_config /etc/ssh/
@@ -65,3 +66,5 @@ cp /root/Freedom-internet/config.json /usr/local/etc/xray/
 systemctl restart xray
 systemctl status xray
 echo "************   DONE   *************"
+echo -e "  \033[0;34m .............. Rebooting ..............\n \033[0;35m     Please SSH with port 36963 \033[0m"
+reboot
